@@ -12,9 +12,12 @@ let yPos = parseInt(process.argv[4]);
 console.log(imagePath, xPos, yPos);
 
 const abi = require('../src/MillionEtherPage.abi.json');
+
+// Insert Account ID
 const mepAddress = '';
 const mep = new web3.eth.Contract(abi, mepAddress);
 
+// Insert Account ID
 const fromAccount = '';
 
 function dec2hex(dec) {
