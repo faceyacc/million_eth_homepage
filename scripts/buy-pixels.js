@@ -11,7 +11,7 @@ let xPos = parseInt(process.argv[3]);
 let yPos = parseInt(process.argv[4]);
 console.log(imagePath, xPos, yPos);
 
-const abi = require('../contracts/MillionEtherPage_sol_MillionEtherPage.abi.json');
+const abi = require('./MillionEtherPage.abi.json'');
 
 // Insert Account ID
 const mepAddress = '0x68366637fB3bd887410a24f92b6a1e56ed707780';
