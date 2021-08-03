@@ -12,13 +12,9 @@ let yPos = parseInt(process.argv[4]);
 console.log(imagePath, xPos, yPos);
 
 const abi = require('./MillionEtherPage.abi.json');
-
-// Insert Account ID
-const mepAddress = '0x68366637fB3bd887410a24f92b6a1e56ed707780';
+const mepAddress = '';
 const mep = new web3.eth.Contract(abi, mepAddress);
-
-// Insert Account ID
-const fromAccount = '0x356a98a640d19a811d4d7570e038088c14032b25';
+const fromAccount = '';
 
 function dec2hex(dec) {
   return ('00' + parseInt(dec, 10).toString(16)).slice(-2);
@@ -40,34 +36,34 @@ getPixels(imagePath, function(err, pixels) {
   async function sendPixels() {
     let promises = [];
     let i = 0;
-  }
-  for (let x = 0; x < width; x++) {
-    for (let y = 0; y < height; y++) {
-      let r = pixels.get(0, x, y, 0);
-      let g = pixels.get(0, x, y, 1);
-      let b = pixels.get(0, x, y, 2);
+    for (let x = 0; x < width; x++) {
+      for (let y = 0; y < height; y++) {
+        let r = pixels.get(0, x, y, 0);
+        let g = pixels.get(0, x, y, 1);
+        let b = pixels.get(0, x, y, 2);
 
-      console.log(
-        { x: x, y: y },
-        ['0x', dec2hex(r), dec2hex(g), dec2hex(b)].join('')
-      );
+        console.log(
+          { x: x, y: y },
+          ['0x', dec2hex(r), dec2hex(g), dec2hex(b)].join('')
+        );
 
-      let resp = mep.methods.colorPixel(
-        xPos + x,
-        yPos + y,
-        ['0x', dec2hex(r), dec2hex(g), dec2hex(b)].join(
-          ''
+        let resp = mep.methods.colorPixel(
+          xPos + x,
+          yPos + y,
+          ['0x', dec2hex(r), dec2hex(g), dec2hex(b)].join(
+            ''
+          )
         )
-      )
-      .send({ from: fromAccount });
-      promises.push(resp);
+        .send({ from: fromAccount });
+        promises.push(resp);
 
-      if (i > 0 && i % 128 == 0) {
-        await Promise.race(promises);
-        promises = [];
+        if (i > 0 && i % 128 == 0) {
+          await Promise.race(promises);
+          promises = [];
+        }
+
+        i++;
       }
-
-      i++;
     }
   }
   sendPixels().then(() => console.log('Done'));
