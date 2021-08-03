@@ -11,7 +11,7 @@ web3.setProvider(
 const abi = require('./MillionEtherPage.abi.json');
 
 // Insert Account ID
-const mepAddress = '';
+const mepAddress = '0x68366637fB3bd887410a24f92b6a1e56ed707780';
 
 let mep = new web3.eth.Contract(abi, mepAddress);
 
