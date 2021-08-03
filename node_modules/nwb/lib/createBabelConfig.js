@@ -1,0 +1,177 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = createBabelConfig;
+
+var _path = _interopRequireDefault(require("path"));
+
+var _errors = require("./errors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function createBabelConfig(buildConfig = {}, userConfig = {}, userConfigPath = '', userConfigBrowsers = {}) {
+  let {
+    absoluteRuntime,
+    commonJSInterop,
+    env: buildEnv = {},
+    modules = false,
+    plugins: buildPlugins = [],
+    presets: buildPresets,
+    proposals: buildProposals = {},
+    removePropTypes: buildRemovePropTypes = false,
+    runtime: buildRuntime,
+    webpack = true
+  } = buildConfig;
+  let {
+    cherryPick,
+    config: userConfigFunction,
+    env: userEnv = {},
+    loose,
+    plugins: userPlugins = [],
+    presets: userPresets,
+    proposals: userProposals = {},
+    react = {},
+    reactConstantElements,
+    removePropTypes: userRemovePropTypes,
+    runtime: userRuntime
+  } = userConfig;
+  let presets = [];
+  let plugins = [// XXX Webpack can't currently handle untranspiled ?. and ?? syntax
+  // See https://github.com/webpack/webpack/issues/10227#issuecomment-588409413
+  require.resolve('@babel/plugin-proposal-optional-chaining'), require.resolve('@babel/plugin-proposal-nullish-coalescing-operator')]; // Default to loose mode unless explicitly configured
+
+  if (typeof loose === 'undefined') {
+    loose = true;
+  } // Build config controls whether or not we set browser targets. Users can
+  // override this using `browsers` or `babel.env.targets` config.
+
+
+  let userTargets = {};
+
+  if (buildEnv.targets) {
+    let targets = userConfigBrowsers && (process.env.NODE_ENV === 'production' ? userConfigBrowsers.production : userConfigBrowsers.development);
+
+    if (targets) {
+      userTargets.targets = targets;
+    }
+  }
+
+  presets.push([require.resolve('@babel/preset-env'), {
+    loose,
+    ...buildEnv,
+    modules,
+    // Targets config from top-level browsers config if present
+    ...userTargets,
+    // The user gets a last go at all the env options
+    ...userEnv
+  }]); // Additional build presets
+
+  if (Array.isArray(buildPresets)) {
+    buildPresets.forEach(preset => {
+      // Presets which are configurable via user config are specified by name so
+      // customisation can be handled in this module.
+      if (preset === 'react') {
+        presets.push([require.resolve('@babel/preset-react'), {
+          development: process.env.NODE_ENV !== 'production',
+          ...react
+        }]);
+      } else if (preset === 'react-prod') {
+        // Hoist static element subtrees up so React can skip them when reconciling
+        if (reactConstantElements !== false) {
+          plugins.push(require.resolve('@babel/plugin-transform-react-constant-elements'));
+        } // Remove or wrap propTypes and optionally remove prop-types imports
+
+
+        if (userRemovePropTypes !== false) {
+          plugins.push([require.resolve('babel-plugin-transform-react-remove-prop-types'), typeof userRemovePropTypes === 'object' ? userRemovePropTypes : {}]);
+        }
+      } else {
+        presets.push(preset);
+      }
+    });
+  } // Proposal plugins
+
+
+  if (userProposals !== false) {
+    presets.push([require.resolve('babel-preset-proposals'), {
+      // Pass on nwb's loose = true default
+      loose,
+      decorators: true,
+      classProperties: true,
+      exportDefaultFrom: true,
+      exportNamespaceFrom: true,
+      ...buildProposals,
+      ...userProposals,
+      // Required for non-local usage of nwb
+      absolutePaths: true
+    }]);
+  }
+
+  if (userPresets) {
+    presets = presets.concat(userPresets);
+  }
+
+  let config = {
+    presets
+  };
+  plugins = plugins.concat(buildPlugins, userPlugins); // App builds use the 'react-prod' preset to remove/wrap propTypes, component
+  // builds use this config instead.
+
+  if (buildRemovePropTypes) {
+    // User config can disable removal of propTypes
+    if (userRemovePropTypes !== false) {
+      plugins.push([require.resolve('babel-plugin-transform-react-remove-prop-types'), { ...(typeof buildRemovePropTypes === 'object' ? buildRemovePropTypes : {}),
+        ...(typeof userRemovePropTypes === 'object' ? userRemovePropTypes : {})
+      }]);
+    }
+  } // The Runtime transform imports helpers and the regenerator runtime when required
+  // See https://babeljs.io/docs/en/babel-plugin-transform-runtime.html
+
+
+  if (userRuntime !== false) {
+    plugins.push([require.resolve('@babel/plugin-transform-runtime'), {
+      absoluteRuntime: absoluteRuntime !== false ? _path.default.resolve(__dirname, '..') : false,
+      useESModules: modules === false,
+      ...(typeof buildRuntime === 'object' ? buildRuntime : {}),
+      ...(typeof userRuntime === 'object' ? userRuntime : {})
+    }]);
+  } // Allow Babel to parse (but not transform) import() when used with Webpack
+
+
+  if (webpack) {
+    plugins.push(require.resolve('@babel/plugin-syntax-dynamic-import'));
+  } // Provide CommonJS interop so users don't have to tag a .default onto their
+  // imports if they're using vanilla Node.js require().
+
+
+  if (commonJSInterop) {
+    plugins.push(require.resolve('babel-plugin-add-module-exports'));
+  } // The lodash plugin supports generic cherry-picking for named modules
+
+
+  if (cherryPick) {
+    plugins.push([require.resolve('babel-plugin-lodash'), {
+      id: cherryPick
+    }]);
+  }
+
+  if (plugins.length > 0) {
+    config.plugins = plugins;
+  } // Finally, give the user a chance to do whatever they want with the generated
+  // config.
+
+
+  if (typeof userConfigFunction === 'function') {
+    config = userConfigFunction(config);
+
+    if (!config) {
+      throw new _errors.UserError(`babel.config() in ${userConfigPath} didn't return anything - it must return the Babel config object.`);
+    }
+  }
+
+  return config;
+}
+
+module.exports = exports.default;

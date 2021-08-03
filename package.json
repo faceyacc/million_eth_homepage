@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "get-pixels": "^3.3.3",
-    "web3": "^1.4.0"
+    "web3": "^1.5.0"
   },
   "devDependencies": {
     "nwb": "0.25.x"

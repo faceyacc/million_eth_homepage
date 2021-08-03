@@ -1,10 +1,47 @@
 {
 	"compiler": {
-		"version": "0.8.4+commit.c7e474f2"
+		"version": "0.6.12+commit.27d51765"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "x",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "y",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "soldPrice",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "color",
+						"type": "uint256[]"
+					}
+				],
+				"name": "PixelChanged",
+				"type": "event"
+			},
 			{
 				"inputs": [
 					{
@@ -18,14 +55,33 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "bytes3",
+						"internalType": "uint256[]",
 						"name": "color",
-						"type": "bytes3"
+						"type": "uint256[]"
 					}
 				],
 				"name": "colorPixel",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "pendingRefunds",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -44,12 +100,24 @@
 				"name": "pixels",
 				"outputs": [
 					{
-						"internalType": "bytes3",
-						"name": "",
-						"type": "bytes3"
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "soldPrice",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawRefunds",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -81,11 +149,11 @@
 	},
 	"sources": {
 		"MillionEtherPage.sol": {
-			"keccak256": "0x58db5f0883ec5bf9a0e9688bf0c116bd444d111a8504aee7d20385d329d65a2a",
+			"keccak256": "0x512983a01d186953d156e139f9a17c15055df8d5c045f70aee1121cd1bb18e20",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://043fd2ea4370048c649557b932ebd96cff3ac02512a3fbb3a137f0c2b2bcab2d",
-				"dweb:/ipfs/QmQ9ZGtgucgsMgjEohCfDLmBksovZAaewEjyBPC3TkXuz2"
+				"bzz-raw://d62826d94c19345f4ef2e32cce21f081c3b7aedb70dec8b31e455ded13f16f4c",
+				"dweb:/ipfs/QmZxtLXPu8kZTXR3zcdhVLa6S7FTMFHkoW6JAeRABvGnWX"
 			]
 		}
 	},
