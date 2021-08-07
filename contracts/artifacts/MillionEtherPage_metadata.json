@@ -1,0 +1,93 @@
+{
+	"compiler": {
+		"version": "0.8.6+commit.11564f7e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "x",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "y",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes3",
+						"name": "color",
+						"type": "bytes3"
+					}
+				],
+				"name": "colorPixel",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "pixels",
+				"outputs": [
+					{
+						"internalType": "bytes3",
+						"name": "",
+						"type": "bytes3"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/MillionEtherPage.sol": "MillionEtherPage"
+		},
+		"evmVersion": "berlin",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/MillionEtherPage.sol": {
+			"keccak256": "0x7f664522ef7907830455fc68c60c29a53de219f8e71e8332aba742c351dd37f5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://dc01d2887b67e766524bd72158e1e38950deefb862a7be1514597243558ba9af",
+				"dweb:/ipfs/QmdDLjgKNrbTWMpQCRAScehLKwatiq4YtojTgn1KFgcbc7"
+			]
+		}
+	},
+	"version": 1
+}
