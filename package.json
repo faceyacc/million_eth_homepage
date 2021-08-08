@@ -12,6 +12,8 @@
     "test:watch": "nwb test --server"
   },
   "dependencies": {
+    "get-pixels": "^3.3.3",
+    "web3": "^1.5.1"
   },
   "devDependencies": {
     "nwb": "0.25.x"
