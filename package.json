@@ -1,7 +1,7 @@
 {
-  "name": "million-ether-page",
+  "name": "million-ether",
   "version": "1.0.0",
-  "description": "Describe million-ether-page here",
+  "description": "Describe million-ether here",
   "private": true,
   "scripts": {
     "build": "nwb build-web-app",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "get-pixels": "^3.3.3",
-    "web3": "^1.5.0"
+    "web3": "^1.5.1"
   },
   "devDependencies": {
     "nwb": "0.25.x"

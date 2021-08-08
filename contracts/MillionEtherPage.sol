@@ -20,7 +20,6 @@ contract MillionEtherPage {
         uint[] color
     );
         
-        
   function colorPixel(uint x, uint y, uint[] memory color) payable public {
     Pixel storage pixel = pixels[x][y];
     require(msg.value > pixel.soldPrice);
@@ -36,7 +35,6 @@ contract MillionEtherPage {
     emit PixelChanged(x, y, pixel.owner, pixel.soldPrice, pixel.color);
   }
     
-  
   function withdrawRefunds() public {
       address payable payee = payable(msg.sender);
       uint payment = pendingRefunds[payee];
@@ -47,7 +45,4 @@ contract MillionEtherPage {
       pendingRefunds[payee] = 0;
       require(payee.send(payment));
   }
-    
-    
-    
 }

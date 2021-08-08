@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.6.12+commit.27d51765"
+		"version": "0.8.4+commit.c7e474f2"
 	},
 	"language": "Solidity",
 	"output": {
@@ -134,7 +134,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"MillionEtherPage.sol": "MillionEtherPage"
+			"contracts/MillionEtherPage.sol": "MillionEtherPage"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -148,12 +148,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"MillionEtherPage.sol": {
-			"keccak256": "0x512983a01d186953d156e139f9a17c15055df8d5c045f70aee1121cd1bb18e20",
+		"contracts/MillionEtherPage.sol": {
+			"keccak256": "0xbbf8c907cc691d17e2a283250da1f63f20779336360876dacbc2af6cb0da449b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d62826d94c19345f4ef2e32cce21f081c3b7aedb70dec8b31e455ded13f16f4c",
-				"dweb:/ipfs/QmZxtLXPu8kZTXR3zcdhVLa6S7FTMFHkoW6JAeRABvGnWX"
+				"bzz-raw://a3acb9be26d3f336708b58f4415477e2da07cf765ff7b255e4b0099f5ca06010",
+				"dweb:/ipfs/QmQYmzFbjbNJCeby1nzVaixMgs18AHPuju1yqmwmgQwGhg"
 			]
 		}
 	},

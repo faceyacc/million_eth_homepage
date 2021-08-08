@@ -10,9 +10,8 @@ web3.setProvider(
 
 const abi = require('./MillionEtherPage.abi.json');
 
-// Insert Account ID
-const mepAddress = '0x68366637fB3bd887410a24f92b6a1e56ed707780';
-
+// Insert contract address
+const mepAddress = '0xd758E8Bf42CE22A6FDCC2C939882c303796768EA';
 let mep = new web3.eth.Contract(abi, mepAddress);
 
 function draw() {
@@ -41,7 +40,7 @@ function draw() {
     function parseColor(rawColor) {
       let rgb = [];
       for (let i = 0; i < rawColor.length; i += 2) {
-        let chunk = rawColor.substring(i, i + 2);
+        let chunk = rawColor[i].substring(i, i + 2);
         if (chunk !== '0x') {
           rgb.push(parseInt(chunk, 16).toString(10));
         }
@@ -92,5 +91,4 @@ function draw() {
 
 document.body.onload = function() {
   draw();
-  checkBalance();
 };
