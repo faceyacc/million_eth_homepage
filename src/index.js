@@ -10,8 +10,7 @@ web3.setProvider(
 
 const abi = require('./MillionEtherPage.abi.json');
 
-// Insert contract address
-const mepAddress = '0xd758E8Bf42CE22A6FDCC2C939882c303796768EA';
+const mepAddress = '';
 let mep = new web3.eth.Contract(abi, mepAddress);
 
 function draw() {

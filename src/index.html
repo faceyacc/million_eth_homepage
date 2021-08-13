@@ -4,12 +4,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>million-ether</title>
+    <title>Million Ether Page</title>
     <meta name="description" content="">
+    <style>
+      body {
+        background-color: linen;
+      }
+      .header-text {
+        display: flex;
+        justify-content: center;
+        color: black;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .button-container {
+        display: flex;
+        justify-content: center;
+      }
+      .button {
+        background-color: #f44336; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+      .canvas-container {
+        display: flex;
+        justify-content: center;
+      }
+      #canvas {
+        background-color: white;
+        margin-top: 25px;
+        border: 3px solid black;
+      }
+    </style>
   </head>
   <body>
-    <h1>Million Ether Page</h1>
-    <div class="canvasContainer">
+    <h1 class="header-text">Million Ether Page</h1>
+    <div class="button-container">
+      <button class="button" type="button" onclick="">Buy Pixel</button>
+    </div>
+    <div class="canvas-container">
       <canvas id="canvas" width="1000" height="1000"></canvas>
     </div>
   </body>
