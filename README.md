@@ -32,7 +32,7 @@ https://www.cloudflare.com/distributed-web-gateway/#ethereum-gateway
 
 ## Team members (5 pts)
 
-* Ty Facey (faceyt@wit.edu), Team Lead, Smart contract dev
-* Ian Seto (setoi@wit.edu), Frontend dev
+* Ty Facey (faceyt@wit.edu), Team Lead, Smart contract developer
+* Ian Seto (setoi@wit.edu), Frontend developer, Smart contract developer
 
 
