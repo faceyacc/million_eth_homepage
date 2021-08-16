@@ -21,16 +21,16 @@ Million Ether Homepage is a webiste allowing user to own a piece of digital real
 5. Click deploy project. 
 6. Navigate to Cloudflare's Ethereum Gateway site and scroll down to bottom of page and paste cloudflare DNS name. You should now have a Cloudflare website endpoint to use and share.
 
-## Demo video (30 pts)
+## Demo video
 
 https://youtu.be/WW70QZ77sZc
 
-## References (5 pts)
+## References
 
 https://developers.cloudflare.com/pages/framework-guides/deploy-a-react-application
 https://www.cloudflare.com/distributed-web-gateway/#ethereum-gateway
 
-## Team members (5 pts)
+## Team members
 
 * Ty Facey (faceyt@wit.edu), Team Lead, Smart contract developer
 * Ian Seto (setoi@wit.edu), Frontend developer, Smart contract developer
