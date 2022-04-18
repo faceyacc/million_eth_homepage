@@ -5,7 +5,7 @@ jobs:
     parameters: 
       diff_branch:
         type: string
-        default: main
+        default: circleci-project-setup
 
     environment:
       # Scan changed files in PRs, block on new issues only (existing issues ignored)
@@ -33,7 +33,6 @@ jobs:
 
 
 
-
 workflows:
   semgrep-nightly:
     triggers:
@@ -41,8 +40,6 @@ workflows:
           cron: "0 0 * * *"
           filters:
             branches:
-              only:
-                - main
-                - beta
+              only: circleci-project-setup
     jobs:
       - semgrep-scan
