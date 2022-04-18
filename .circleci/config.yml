@@ -29,7 +29,8 @@ jobs:
               echo 'export SEMGREP_REPO_NAME=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME' >> $BASH_ENV
       - run:
           name: "Semgrep scan"
-          command: semgrep ci
+          command: semgrep login; semgrep ci
+
 
 
 
