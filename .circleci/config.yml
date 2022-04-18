@@ -5,7 +5,7 @@ jobs:
     parameters: 
       diff_branch:
         type: string
-        default: master
+        default: main
 
     environment:
       # Scan changed files in PRs, block on new issues only (existing issues ignored)
@@ -40,6 +40,6 @@ workflows:
           cron: "0 0 * * *"
           filters:
             branches:
-              only: master
+              only: main
     jobs:
       - semgrep-scan
