@@ -5,7 +5,7 @@ jobs:
     parameters: 
       diff_branch:
         type: string
-        default: main
+        default: master
 
     environment:
       # Scan changed files in PRs, block on new issues only (existing issues ignored)
@@ -17,7 +17,7 @@ jobs:
       # SEMGREP_TIMEOUT: 300
 
     docker:
-      - image: returntocorp/semgrep
+      - image: returntocorp/semgrep-agent:v1
     steps:
       - checkout
       - run:
@@ -29,20 +29,11 @@ jobs:
               echo 'export SEMGREP_REPO_NAME=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME' >> $BASH_ENV
       - run:
           name: "Semgrep scan"
-          command: semgrep login; semgrep ci
-
-
-
-
+          command: semgrep-agent
 workflows:
-  semgrep-nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
+  Semgrep:
+    jobs:
+      - semgrep-scan:
           filters:
             branches:
-              only:
-                - main
-                - beta
-    jobs:
-      - semgrep-scan
+              only: master
