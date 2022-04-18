@@ -17,7 +17,7 @@ jobs:
       # SEMGREP_TIMEOUT: 300
 
     docker:
-      - image: returntocorp/semgrep-agent:v1
+      - image: returntocorp/semgrep
     steps:
       - checkout
       - run:
@@ -30,11 +30,16 @@ jobs:
       - run:
           name: "Semgrep scan"
           command: semgrep login; semgrep ci
+
+
+
 workflows:
-  version: 2
-  Semgrep:
-    jobs:
-      - semgrep-scan:
+  semgrep-nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
           filters:
             branches:
               only: master
+    jobs:
+      - semgrep-scan
